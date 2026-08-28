@@ -1,6 +1,8 @@
+import Image from "next/image";
 import Link from "next/link";
+import AddToCartButton from "../../components/AddToCartButton";
 import { notFound } from "next/navigation";
-import { products } from "../../products";
+import { products, getFinalPrice } from "../../products";
 
 // Tell Next.js which ids exist, so it can build these pages ahead of time.
 export function generateStaticParams() {
@@ -29,7 +31,7 @@ export default async function ProductPage({
   }
 
   const hasDiscount = product.discount > 0;
-  const finalPrice = product.price * (1 - product.discount / 100);
+  const finalPrice = getFinalPrice(product);
 
   return (
     <main className="flex-1 bg-zinc-50">
@@ -43,11 +45,18 @@ export default async function ProductPage({
 
         <div className="mt-6 grid gap-10 md:grid-cols-2">
           {/* Image placeholder */}
-          <div className="relative flex h-80 items-center justify-center rounded-2xl border border-zinc-200 bg-white text-8xl">
-            {product.emoji}
+          <div className="relative h-80 overflow-hidden rounded-2xl border border-zinc-200 bg-white">
+            <Image
+              src={product.image}
+              alt={product.name}
+              fill
+              sizes="(max-width: 768px) 100vw, 50vw"
+              className="object-cover"
+              priority
+            />
 
             {hasDiscount && (
-              <span className="absolute top-4 left-4 rounded-full bg-orange-500 px-3 py-1 text-sm font-semibold text-white">
+              <span className="absolute top-4 left-4 z-10 rounded-full bg-orange-500 px-3 py-1 text-sm font-semibold text-white">
                 -{product.discount}%
               </span>
             )}
@@ -91,6 +100,8 @@ export default async function ProductPage({
               This is a demo product for the Mini Store project. In a real shop
               this text would come from a database or a CMS.
             </p>
+
+            <AddToCartButton product={product} className="mt-6 w-fit px-6 py-3" />
 
             <ul className="mt-5 space-y-1 text-sm text-zinc-600">
               <li>✓ Free shipping on orders over $99</li>

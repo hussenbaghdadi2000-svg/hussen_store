@@ -1,30 +1,34 @@
+import Image from "next/image";
 import Link from "next/link";
-import { Product } from "../products";
+import AddToCartButton from "./AddToCartButton";
+import { Product, getFinalPrice } from "../products";
 
 type ProductCardProps = {
   product: Product;
-  onAddToCart: (product: Product) => void;
 };
 
-export default function ProductCard({
-  product,
-  onAddToCart,
-}: ProductCardProps) {
+export default function ProductCard({ product }: ProductCardProps) {
   // Derived values: calculated from props, not stored in state.
   const hasDiscount = product.discount > 0;
-  const finalPrice = product.price * (1 - product.discount / 100);
+  const finalPrice = getFinalPrice(product);
 
   return (
-    <div className="flex flex-col overflow-hidden rounded-xl border border-zinc-200 bg-white shadow-sm transition hover:shadow-md">
-      {/* Image placeholder + discount badge — links to the detail page */}
+    <div className="group flex flex-col overflow-hidden rounded-xl border border-zinc-200 bg-white shadow-sm transition hover:shadow-md">
+      {/* Image + discount badge */}
       <Link
         href={`/products/${product.id}`}
-        className="relative flex h-40 items-center justify-center bg-zinc-100 text-6xl"
+        className="relative block h-48 overflow-hidden bg-zinc-100"
       >
-        {product.emoji}
+        <Image
+          src={product.image}
+          alt={product.name}
+          fill
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          className="object-cover transition duration-300 group-hover:scale-105"
+        />
 
         {hasDiscount && (
-          <span className="absolute top-2 left-2 rounded-full bg-orange-500 px-2 py-0.5 text-xs font-semibold text-white">
+          <span className="absolute top-2 left-2 z-10 rounded-full bg-orange-500 px-2 py-0.5 text-xs font-semibold text-white">
             -{product.discount}%
           </span>
         )}
@@ -70,13 +74,7 @@ export default function ProductCard({
           )}
         </div>
 
-        <button
-          type="button"
-          onClick={() => onAddToCart(product)}
-          className="mt-2 rounded-lg bg-zinc-900 px-4 py-2 text-sm font-medium text-white transition hover:bg-zinc-700 active:scale-95"
-        >
-          Add to Cart
-        </button>
+        <AddToCartButton product={product} className="mt-2" />
       </div>
     </div>
   );

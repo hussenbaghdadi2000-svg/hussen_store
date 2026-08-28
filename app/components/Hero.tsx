@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export default function Hero() {
   return (
     <section className="bg-linear-to-r from-orange-50 to-zinc-100">
@@ -27,8 +29,15 @@ export default function Hero() {
         </div>
 
         {/* Right: image placeholder */}
-        <div className="flex h-56 w-56 shrink-0 items-center justify-center rounded-full bg-white text-8xl shadow-sm md:h-64 md:w-64">
-          ⌚
+        <div className="relative h-56 w-56 shrink-0 overflow-hidden rounded-full bg-white shadow-sm md:h-64 md:w-64">
+          <Image
+            src="/hero-watch.jpg"
+            alt="Smart watch"
+            fill
+            sizes="(max-width: 768px) 224px, 256px"
+            className="object-cover"
+            priority
+          />
         </div>
       </div>
     </section>
