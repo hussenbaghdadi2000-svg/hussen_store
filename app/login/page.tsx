@@ -14,8 +14,8 @@ export default async function LoginPage({ searchParams }: PageProps<"/login">) {
   const nextPath = typeof next === "string" ? next : "";
 
   return (
-    <main className="flex flex-1 items-center justify-center bg-zinc-50 px-6 py-16">
-      <div className="w-full max-w-sm rounded-2xl border border-zinc-200 bg-white p-8 shadow-sm">
+    <main className="flex flex-1 items-center justify-center bg-zinc-50 px-4 py-12 sm:px-6 sm:py-16">
+      <div className="w-full max-w-sm rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm sm:p-8">
         <h1 className="text-2xl font-bold text-zinc-900">Welcome back</h1>
         <p className="mt-1 mb-6 text-sm text-zinc-500">
           Sign in to your MiniStore account.

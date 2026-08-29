@@ -4,7 +4,7 @@ import { categories } from "../products";
 
 export default function CategoryRow() {
   return (
-    <section className="mx-auto max-w-6xl px-6 pt-14">
+    <section className="mx-auto max-w-6xl px-4 sm:px-6 pt-14">
       <h2 className="text-2xl font-bold text-zinc-900">Shop By Category</h2>
 
       <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">

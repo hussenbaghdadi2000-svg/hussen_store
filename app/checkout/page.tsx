@@ -12,7 +12,7 @@ export default async function CheckoutPage() {
 
   return (
     <main className="flex-1 bg-zinc-50">
-      <div className="mx-auto max-w-5xl px-6 py-10">
+      <div className="mx-auto max-w-5xl px-4 sm:px-6 py-10">
         <nav aria-label="Breadcrumb" className="text-sm text-zinc-500">
           <Link href="/cart" className="transition hover:text-orange-500">
             Cart

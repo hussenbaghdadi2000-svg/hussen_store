@@ -37,7 +37,7 @@ export default async function CategoryPage({
   return (
     <main className="flex-1 bg-zinc-50">
       {/* Banner */}
-      <div className="relative h-56 w-full overflow-hidden">
+      <div className="relative h-44 w-full overflow-hidden sm:h-56">
         <Image
           src={category.image}
           alt={category.name}
@@ -48,7 +48,7 @@ export default async function CategoryPage({
         />
         <div className="absolute inset-0 bg-black/55" />
         <div className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center text-white">
-          <h1 className="text-4xl font-bold">{category.name}</h1>
+          <h1 className="text-3xl font-bold sm:text-4xl">{category.name}</h1>
           <p className="mt-1 text-sm text-white/80">
             {categoryProducts.length} product
             {categoryProducts.length === 1 ? "" : "s"}
@@ -56,7 +56,7 @@ export default async function CategoryPage({
         </div>
       </div>
 
-      <div className="mx-auto max-w-6xl px-6 py-10">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 py-10">
         {/* Breadcrumb */}
         <nav aria-label="Breadcrumb" className="text-sm text-zinc-500">
           <Link href="/" className="transition hover:text-orange-500">

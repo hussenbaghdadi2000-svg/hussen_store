@@ -42,7 +42,7 @@ export default function ProductSearch() {
   const isSearching = query.trim() !== "";
 
   return (
-    <section className="mx-auto max-w-6xl px-6 pt-12">
+    <section className="mx-auto max-w-6xl px-4 sm:px-6 pt-12">
       <label htmlFor="product-search" className="sr-only">
         Search products
       </label>

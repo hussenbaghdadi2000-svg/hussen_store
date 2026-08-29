@@ -7,7 +7,7 @@ const perks = [
 export default function PromoBar() {
   return (
     <div className="bg-zinc-900 text-white">
-      <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-x-8 gap-y-1 px-6 py-2 text-xs">
+      <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-x-4 gap-y-1 sm:gap-x-8 px-4 sm:px-6 py-2 text-xs">
         {perks.map((perk) => (
           <span key={perk.text} className="flex items-center gap-1.5">
             <span>{perk.icon}</span>

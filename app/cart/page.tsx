@@ -13,7 +13,7 @@ export default function CartPage() {
   // Empty state - show this instead of an empty table.
   if (cartItems.length === 0) {
     return (
-      <main className="flex flex-1 flex-col items-center justify-center bg-zinc-50 px-6 py-20 text-center">
+      <main className="flex flex-1 flex-col items-center justify-center bg-zinc-50 px-4 py-20 text-center sm:px-6">
         <p className="text-6xl">🛒</p>
         <h1 className="mt-4 text-2xl font-bold text-zinc-900">
           Your cart is empty
@@ -33,74 +33,79 @@ export default function CartPage() {
 
   return (
     <main className="flex-1 bg-zinc-50">
-      <div className="mx-auto max-w-4xl px-6 py-10">
+      <div className="mx-auto max-w-4xl px-4 sm:px-6 py-10">
         <h1 className="text-3xl font-bold text-zinc-900">Your Cart</h1>
 
         <ul className="mt-8 space-y-4">
           {cartItems.map((item) => (
             <li
               key={item.product.id}
-              className="flex flex-wrap items-center gap-4 rounded-xl border border-zinc-200 bg-white p-4"
+              className="flex flex-col gap-4 rounded-xl border border-zinc-200 bg-white p-4 sm:flex-row sm:items-center sm:gap-6"
             >
-              <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-lg bg-zinc-100">
-                <Image
-                  src={item.product.image}
-                  alt={item.product.name}
-                  fill
-                  sizes="64px"
-                  className="object-cover"
-                />
+              {/* Image + name: always stay side by side */}
+              <div className="flex min-w-0 items-center gap-4 sm:flex-1">
+                <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-lg bg-zinc-100">
+                  <Image
+                    src={item.product.image}
+                    alt={item.product.name}
+                    fill
+                    sizes="64px"
+                    className="object-cover"
+                  />
+                </div>
+
+                <div className="min-w-0">
+                  <Link
+                    href={`/products/${item.product.id}`}
+                    className="font-semibold text-zinc-900 transition hover:text-orange-500"
+                  >
+                    {item.product.name}
+                  </Link>
+                  <p className="text-sm text-zinc-500">
+                    ${getFinalPrice(item.product).toFixed(2)} each
+                  </p>
+                </div>
               </div>
 
-              <div className="min-w-40 flex-1">
-                <Link
-                  href={`/products/${item.product.id}`}
-                  className="font-semibold text-zinc-900 transition hover:text-orange-500"
-                >
-                  {item.product.name}
-                </Link>
-                <p className="text-sm text-zinc-500">
-                  ${getFinalPrice(item.product).toFixed(2)} each
+              {/* Controls: own row on mobile, inline from sm up */}
+              <div className="flex items-center justify-between gap-4 sm:justify-end">
+                <div className="flex items-center gap-3 rounded-lg border border-zinc-200 px-2 py-1">
+                  <button
+                    type="button"
+                    aria-label={`Decrease quantity of ${item.product.name}`}
+                    onClick={() => decreaseQuantity(item.product.id)}
+                    className="px-2 text-lg text-zinc-600 transition hover:text-orange-500"
+                  >
+                    −
+                  </button>
+
+                  <span className="w-6 text-center font-medium">
+                    {item.quantity}
+                  </span>
+
+                  <button
+                    type="button"
+                    aria-label={`Increase quantity of ${item.product.name}`}
+                    onClick={() => addToCart(item.product)}
+                    className="px-2 text-lg text-zinc-600 transition hover:text-orange-500"
+                  >
+                    +
+                  </button>
+                </div>
+
+                <p className="w-20 text-right font-bold text-zinc-900">
+                  ${(getFinalPrice(item.product) * item.quantity).toFixed(2)}
                 </p>
-              </div>
-
-              {/* Quantity controls */}
-              <div className="flex items-center gap-3 rounded-lg border border-zinc-200 px-2 py-1">
-                <button
-                  type="button"
-                  aria-label={`Decrease quantity of ${item.product.name}`}
-                  onClick={() => decreaseQuantity(item.product.id)}
-                  className="px-2 text-lg text-zinc-600 transition hover:text-orange-500"
-                >
-                  −
-                </button>
-
-                <span className="w-6 text-center font-medium">
-                  {item.quantity}
-                </span>
 
                 <button
                   type="button"
-                  aria-label={`Increase quantity of ${item.product.name}`}
-                  onClick={() => addToCart(item.product)}
-                  className="px-2 text-lg text-zinc-600 transition hover:text-orange-500"
+                  aria-label={`Remove ${item.product.name} from cart`}
+                  onClick={() => removeFromCart(item.product.id)}
+                  className="text-sm text-zinc-400 transition hover:text-red-500"
                 >
-                  +
+                  ✕
                 </button>
               </div>
-
-              <p className="w-20 text-right font-bold text-zinc-900">
-                ${(getFinalPrice(item.product) * item.quantity).toFixed(2)}
-              </p>
-
-              <button
-                type="button"
-                aria-label={`Remove ${item.product.name} from cart`}
-                onClick={() => removeFromCart(item.product.id)}
-                className="text-sm text-zinc-400 transition hover:text-red-500"
-              >
-                ✕
-              </button>
             </li>
           ))}
         </ul>

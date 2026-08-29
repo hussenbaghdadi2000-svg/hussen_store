@@ -13,7 +13,7 @@ export default function Home() {
 
       <CategoryRow />
 
-      <section id="products" className="mx-auto max-w-6xl px-6 py-14">
+      <section id="products" className="mx-auto max-w-6xl px-4 sm:px-6 py-14">
         <h2 className="text-2xl font-bold text-zinc-900">All Products</h2>
         <p className="mt-1 text-sm text-zinc-500">
           {products.length} products across {categories.length} categories

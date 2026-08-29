@@ -21,7 +21,7 @@ export default async function OrderPage({ params }: PageProps<"/orders/[id]">) {
     <main className="flex-1 bg-zinc-50">
       <ClearCartOnMount />
 
-      <div className="mx-auto max-w-3xl px-6 py-12">
+      <div className="mx-auto max-w-3xl px-4 sm:px-6 py-12">
         <div className="rounded-2xl border border-green-200 bg-green-50 p-6 text-center">
           <p className="text-5xl">✅</p>
           <h1 className="mt-3 text-2xl font-bold text-green-900">
@@ -33,17 +33,17 @@ export default async function OrderPage({ params }: PageProps<"/orders/[id]">) {
         </div>
 
         <div className="mt-6 rounded-2xl border border-zinc-200 bg-white p-6">
-          <div className="flex flex-wrap items-start justify-between gap-4">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
             <div>
               <p className="text-xs tracking-wide text-zinc-500 uppercase">
                 Order number
               </p>
-              <p className="mt-0.5 font-mono text-sm text-zinc-900">
+              <p className="mt-0.5 font-mono text-sm break-all text-zinc-900">
                 {order.id}
               </p>
             </div>
 
-            <div className="text-right">
+            <div className="sm:text-right">
               <p className="text-xs tracking-wide text-zinc-500 uppercase">
                 Placed
               </p>
@@ -134,17 +134,17 @@ export default async function OrderPage({ params }: PageProps<"/orders/[id]">) {
           </div>
         </div>
 
-        <div className="mt-6 flex items-center justify-between">
+        <div className="mt-6 flex flex-col-reverse items-stretch gap-3 sm:flex-row sm:items-center sm:justify-between">
           <Link
             href="/"
-            className="text-sm text-zinc-500 transition hover:text-orange-500"
+            className="text-center text-sm text-zinc-500 transition hover:text-orange-500 sm:text-left"
           >
             ← Continue shopping
           </Link>
 
           <Link
             href="/account"
-            className="rounded-lg bg-zinc-900 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-zinc-700"
+            className="rounded-lg bg-zinc-900 px-5 py-2.5 text-center text-sm font-medium text-white transition hover:bg-zinc-700"
           >
             View my orders
           </Link>

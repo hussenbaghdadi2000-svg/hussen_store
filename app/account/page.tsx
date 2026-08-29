@@ -16,7 +16,7 @@ export default async function AccountPage() {
   const orders = getOrdersForUser(user.id);
 
   return (
-    <main className="flex-1 bg-zinc-50 px-6 py-14">
+    <main className="flex-1 bg-zinc-50 px-4 py-14 sm:px-6">
       <div className="mx-auto max-w-3xl">
         <h1 className="text-3xl font-bold text-zinc-900">My account</h1>
 
@@ -41,7 +41,7 @@ export default async function AccountPage() {
           <div className="mt-8 flex items-center justify-between border-t border-zinc-200 pt-6">
             <Link
               href="/"
-              className="text-sm text-zinc-500 transition hover:text-orange-500"
+              className="text-sm whitespace-nowrap text-zinc-500 transition hover:text-orange-500"
             >
               ← Continue shopping
             </Link>
@@ -72,7 +72,7 @@ export default async function AccountPage() {
                 key={order.id}
                 className="rounded-2xl border border-zinc-200 bg-white p-5"
               >
-                <div className="flex flex-wrap items-start justify-between gap-3">
+                <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-3">
                   <div>
                     <Link
                       href={`/orders/${order.id}`}

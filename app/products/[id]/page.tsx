@@ -36,7 +36,7 @@ export default async function ProductPage({
 
   return (
     <main className="flex-1 bg-zinc-50">
-      <div className="mx-auto max-w-4xl px-6 py-10">
+      <div className="mx-auto max-w-4xl px-4 sm:px-6 py-10">
         <nav aria-label="Breadcrumb" className="text-sm text-zinc-500">
           <Link href="/" className="transition hover:text-orange-500">
             Home
@@ -58,7 +58,7 @@ export default async function ProductPage({
 
         <div className="mt-6 grid gap-10 md:grid-cols-2">
           {/* Image placeholder */}
-          <div className="relative h-80 overflow-hidden rounded-2xl border border-zinc-200 bg-white">
+          <div className="relative h-64 overflow-hidden rounded-2xl border border-zinc-200 bg-white sm:h-80">
             <Image
               src={product.image}
               alt={product.name}
@@ -86,7 +86,7 @@ export default async function ProductPage({
               </Link>
             )}
 
-            <h1 className="mt-3 text-3xl font-bold text-zinc-900">
+            <h1 className="mt-3 text-2xl font-bold text-zinc-900 sm:text-3xl">
               {product.name}
             </h1>
 

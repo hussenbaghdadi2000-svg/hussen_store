@@ -18,7 +18,7 @@ const footerLinks = [
 export default function Footer() {
   return (
     <footer className="border-t border-zinc-200 bg-zinc-900 text-zinc-400">
-      <div className="mx-auto grid max-w-6xl gap-8 px-6 py-12 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="mx-auto grid max-w-6xl gap-8 px-4 sm:px-6 py-12 sm:grid-cols-2 lg:grid-cols-4">
         <div>
           <Link href="/" className="flex items-center gap-2">
             <span className="text-2xl">🛍️</span>
@@ -48,7 +48,7 @@ export default function Footer() {
         ))}
       </div>
 
-      <div className="border-t border-zinc-800 px-6 py-5 text-center text-xs">
+      <div className="border-t border-zinc-800 px-4 py-5 text-center text-xs sm:px-6">
         © 2026 MiniStore. Built with Next.js and Tailwind CSS.
       </div>
     </footer>
