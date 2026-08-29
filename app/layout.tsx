@@ -5,6 +5,7 @@ import Header from "./components/Header";
 import PromoBar from "./components/PromoBar";
 import Footer from "./components/Footer";
 import { CartProvider } from "./context/CartContext";
+import { getCurrentUser } from "./lib/session";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -21,7 +22,10 @@ export const metadata: Metadata = {
   description: "A small Next.js shop demo",
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default async function RootLayout({ children }: LayoutProps<"/">) {
+  // Read the session once, here, and pass it down.
+  const user = await getCurrentUser();
+
   return (
     <html
       lang="en"
@@ -30,7 +34,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="min-h-full flex flex-col bg-white">
         <CartProvider>
           <PromoBar />
-          <Header />
+          <Header user={user} />
           {children}
           <Footer />
         </CartProvider>

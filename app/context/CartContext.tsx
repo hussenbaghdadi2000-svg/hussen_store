@@ -29,12 +29,14 @@ export function CartProvider({ children }: { children: ReactNode }) {
   // Have we finished reading localStorage yet?
   const [isLoaded, setIsLoaded] = useState(false);
 
-  // 1. On mount only: read the saved cart out of the browser.
-  useEffect(() => {
+   useEffect(() => {
     const saved = localStorage.getItem(STORAGE_KEY);
 
     if (saved) {
       try {
+        // Reading localStorage during render would break hydration
+        // (server has no localStorage), so the effect is correct here.
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setCartItems(JSON.parse(saved));
       } catch {
         // Corrupted data - just start with an empty cart.
@@ -45,10 +47,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
     setIsLoaded(true);
   }, []);
 
-  // 2. Whenever the cart changes, write it back.
-  useEffect(() => {
-    // Skip the very first render, before step 1 has run,
-    // otherwise we would overwrite the saved cart with [].
+   useEffect(() => {
+ 
     if (!isLoaded) return;
 
     localStorage.setItem(STORAGE_KEY, JSON.stringify(cartItems));
@@ -58,8 +58,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
     setCartItems((prevItems) => {
       const existing = prevItems.find((item) => item.product.id === product.id);
 
-      // Already in the cart -> bump its quantity by one.
-      if (existing) {
+       if (existing) {
         return prevItems.map((item) =>
           item.product.id === product.id
             ? { ...item, quantity: item.quantity + 1 }
@@ -67,8 +66,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
         );
       }
 
-      // Not in the cart yet -> add a new line.
-      return [...prevItems, { product, quantity: 1 }];
+       return [...prevItems, { product, quantity: 1 }];
     });
   }
 

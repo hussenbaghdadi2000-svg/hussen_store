@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "../context/CartContext";
 import { getFinalPrice } from "../products";
+import { FREE_SHIPPING_THRESHOLD, SHIPPING_FEE } from "../lib/pricing";
 
 export default function CartPage() {
   const { cartItems, cartTotal, addToCart, decreaseQuantity, removeFromCart, clearCart } =
@@ -113,26 +114,30 @@ export default function CartPage() {
 
           <div className="mt-2 flex items-center justify-between text-sm text-zinc-500">
             <span>Shipping</span>
-            <span>{cartTotal > 99 ? "Free" : "$4.99"}</span>
+            <span>
+              {cartTotal >= FREE_SHIPPING_THRESHOLD
+                ? "Free"
+                : `$${SHIPPING_FEE.toFixed(2)}`}
+            </span>
           </div>
 
           <div className="mt-4 flex items-center justify-between border-t border-zinc-200 pt-4 text-lg font-bold text-zinc-900">
             <span>Total</span>
             <span>
-              ${(cartTotal > 99 ? cartTotal : cartTotal + 4.99).toFixed(2)}
+              $
+              {(cartTotal >= FREE_SHIPPING_THRESHOLD
+                ? cartTotal
+                : cartTotal + SHIPPING_FEE
+              ).toFixed(2)}
             </span>
           </div>
 
-          {/* Out of scope for this demo - marked clearly instead of
-              looking like a button that is simply broken. */}
-          <button
-            type="button"
-            disabled
-            title="Checkout is not part of this demo"
-            className="mt-6 w-full cursor-not-allowed rounded-lg bg-orange-500/50 px-6 py-3 font-medium text-white"
+          <Link
+            href="/checkout"
+            className="mt-6 block w-full rounded-lg bg-orange-500 px-6 py-3 text-center font-medium text-white transition hover:bg-orange-600"
           >
-            Checkout (demo only)
-          </button>
+            Proceed to checkout
+          </Link>
 
           <div className="mt-4 flex items-center justify-between text-sm">
             <Link

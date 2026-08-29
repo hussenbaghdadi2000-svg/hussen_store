@@ -15,11 +15,14 @@ export default function ProductSearch() {
 
     // Nothing typed -> clear everything, don't call the API.
     if (trimmed === "") {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setResults([]);
+       
       setIsLoading(false);
       return;
     }
 
+     
     setIsLoading(true);
 
     // Wait 300ms after the last keystroke before calling the API.
